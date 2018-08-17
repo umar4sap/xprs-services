@@ -1,0 +1,104 @@
+swagger: "2.0"
+info:
+  description: "Login services using auth0"
+  version: "0.0.1"
+  title: "xprs signup and login"
+  
+basePath: "/xprs/services/signup-login"
+schemes:
+- "http"
+paths:
+     
+  /users/signup:
+    post:
+      tags:
+      - "User"
+      summary: "Creates a user in xprs"
+      description: ""
+      operationId: "createUser"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "user details that need to be added to the system."
+        required: false
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        200:
+          description: "User details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new user"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "UserService"
+  /users/login:
+    post:
+      tags:
+      - "User"
+      summary: "Gets user token for internal API's"
+      description: "Gets user token for internal API's"
+      operationId: "startUserLogin"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "user details that need to be added to the system."
+        required: false
+        schema:
+          $ref: "#/definitions/UserData"
+      responses:
+        200:
+          description: "User Token."
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "UserService"
+  /swagger:
+    x-swagger-pipe: swagger_raw 
+definitions:
+  User:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+        description: "email of useruser."
+      name:
+        type: "string"
+        description: "Name of user."
+      password:
+        type: "string"
+        description: "Password of user."
+      app_metadata:
+        type: "object"
+        $ref: "#/definitions/app_metadata"
+      user_metadata:
+        type: "object"
+        description: "User metadata"
+      connection:
+        type: "string"
+        description: "Connection type"
+  app_metadata:
+    type: "object"
+    properties:
+      phone_number:
+        type: "string"
+        description: "Phone number of user."
+      username:
+        type: "string"
+        description: "Name of user."
+  UserData:
+     type: "object"
+     properties:
+      email:
+        type: "string"
+        description: "email of useruser."
+      password:
+        type: "string"
+        description: "Password of user."
