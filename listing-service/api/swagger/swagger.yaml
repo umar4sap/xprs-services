@@ -1,0 +1,268 @@
+swagger: "2.0"
+info:
+  description: "xprs services"
+  version: "0.0.1"
+  title: "xprs  services"
+  contact:
+    name:  xprs API Support
+    email: m.jumar@hotmail.com
+basePath: "/xprs/services/carrier-listing-service"
+schemes:
+- "http"
+securityDefinitions:
+  UserSecurity:
+    type: apiKey
+    in: header
+    name: Authorization
+
+paths:
+  /listing/carrier/{carrierId}:
+    put:
+      tags:
+      - "vendor access"
+      summary: "Post a list."
+      description: "user can post a  list"
+      operationId: "updateCarrier"
+      produces:
+      - "application/json"
+      security: 
+        - UserSecurity: []
+      parameters:  
+      - name: "carrierId"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/updatelist"
+      responses:
+        200:
+          description: "lists details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new publishers"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "listService"
+    patch:
+      tags:
+      - "vendor access"
+      summary: "Post a list."
+      description: "user can post a  list"
+      operationId: "updateCarrierVerification"
+      produces:
+      - "application/json"
+      security: 
+        - UserSecurity: []
+      parameters:  
+      - name: "carrierId"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/updatelist"
+      responses:
+        200:
+          description: "lists details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new publishers"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "listService"
+    get:
+      tags:
+      - "vendor access"
+      summary: "Post a list."
+      description: "user can post a  list"
+      operationId: "getCarrier"
+      produces:
+      - "application/json"
+      security: 
+        - UserSecurity: []
+      parameters:  
+      - name: "carrierId"
+        in: "path"
+        type: "string"
+        required: true
+      responses:
+        200:
+          description: "lists details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new publishers"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "listService"
+    
+  /listing:
+    get:
+      tags:
+      - "vendor access"
+      summary: "Get all lists"
+      description: "Get all lists"
+      operationId: "getList"   
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "A list of lists."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/list"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "listService"
+      
+    post:
+      tags:
+      - "vendor access"
+      summary: "Post a list."
+      description: "user can post a  list"
+      operationId: "addCarrier"
+      produces:
+      - "application/json"
+      security: 
+        - UserSecurity: []
+      parameters: 
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/list"
+      responses:
+        200:
+          description: "lists details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new publishers"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "listService"
+    
+  /list/city/{cityName}:
+    get:
+      tags:
+      - "vendor access"
+      summary: "Get all lists"
+      description: "Get all lists"
+      operationId: "getcityCarriers"  
+      parameters: 
+      - name: "cityName"
+        in: "path"
+        type: "string"
+        required: true
+      responses:
+        200:
+          description: "A list of lists."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/list"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "listService"
+  /list/country/{countryName}:
+    get:
+      tags:
+      - "vendor access"
+      summary: "Get all lists"
+      description: "Get all lists"
+      operationId: "getCountryCarriers"  
+      parameters: 
+      - name: "countryName"
+        in: "path"
+        type: "string"
+        required: true
+      responses:
+        200:
+          description: "A list of lists."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/list"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "listService"
+  /list/city/{cityName}/serviceType/{serviceType}:
+    get:
+      tags:
+      - "vendor access"
+      summary: "Get all lists"
+      description: "Get all lists"
+      operationId: "getcityCarriersListByServiceType"  
+      parameters: 
+      - name: "cityName"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "serviceType"
+        in: "path"
+        type: "string"
+        required: true
+      responses:
+        200:
+          description: "A list of lists."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/list"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "listService"
+  /list/carriers/{status}/page/{pg}:
+    get:
+      tags:
+      - "vendor access"
+      summary: "Get all lists"
+      description: "Get all lists"
+      operationId: "getCarriersAllInReview"  
+      parameters: 
+      - name: "status"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "pg"
+        in: "path"
+        type: "string"
+        required: true
+      responses:
+        200:
+          description: "A list of lists."
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/list"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "listService"
+ 
+      
+  /swagger:
+    x-swagger-pipe: swagger_raw
+definitions:  
+  list:
+    type: "object"
+    required: ['basicDetails']
+    properties:
+     basicDetails:
+          $ref: "#/definitions/basicDetails"
+  basicDetails:
+       type: "object"
+  updatelist:
+    type: "object"
+        
