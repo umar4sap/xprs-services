@@ -37,7 +37,10 @@ app.use(cors());
 app.use(restify.queryParser());
 app.use(restify.bodyParser());
 app.use(jwt);
-
+app.pre(function (req, res, next) {
+    req.log.info({ req: req }, 'REQUEST');
+    next();
+  });
 app.listen(port);
 
 //swagger config
