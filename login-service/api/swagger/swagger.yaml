@@ -5,10 +5,10 @@ info:
   title: "xprs signup and login"
   
 basePath: "/xprs/services/signup-login"
+host: "139.59.30.110:7072"
 schemes:
 - "http"
 paths:
-     
   /users/signup:
     post:
       tags:
