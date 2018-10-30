@@ -2,7 +2,7 @@
 
 //tenantId not added to apis due to auth0 security not implemented
 
-var Carrier = require('../domain/Carrier'),
+var Carrier = require('../domain/carrier'),
  
     Logger = require('bunyan'),
     validator = require('node-validator'),
