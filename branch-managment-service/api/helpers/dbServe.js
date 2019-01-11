@@ -130,7 +130,7 @@ function getbyname(ownershipName, cb) {
             cb(null, result);
         }
     }).catch(function (err) {
-        log.error(traceId, JSON.stringify(err));
+        log.error("traceId", JSON.stringify(err));
         var response = {
             message: "Cannot Get data.",
             statusCode: 404,
