@@ -21,8 +21,10 @@ module.exports = {
     getcityCarriersListByServiceType:getcityCarriersListByServiceType,
     updateCarrier:updateCarrier,
     getCarrier:getCarrier,
+    getCarrierPublic:getCarrierPublic,
     getCarriersAllInReview:getCarriersAllInReview,
-    updateCarrierVerification:updateCarrierVerification
+    updateCarrierVerification:updateCarrierVerification,
+    getListByPage:getListByPage
    
 };
 
@@ -211,6 +213,25 @@ function getCarriersAllInReview(req, res) {
     }
 }
 
+// Get all Carriers for publisher or admin
+function getListByPage(req, res) {
+    var traceId = "test"
+    var pg = req.swagger.params.pg.value;
+    
+    (new Carrier()).findAllCarriersForAllcityPublic(traceId, pg,
+        function (err, content) {
+            console.log('err', err)
+            if (err) {
+                res.writeHead(err.statusCode, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify(err));
+                log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
+            } else if (content) {
+                res.json(content)
+            }
+        });
+    
+}
+
 
 //Pull city's all Carriers and theirs replies
 function getcityCarriers(req, res) {
@@ -338,6 +359,22 @@ function getCarrier(req, res) {
     var carrierId = req.swagger.params.carrierId.value;
     var traceId = process.env.TRACE_VARIABLE|| "test";
     (new Carrier()).getOneCarrier(traceId,carrierId,
+        function (err, content) {
+            if (err) {
+                res.end(JSON.stringify(err));
+                log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
+            } else if (content) {
+                res.set('Content-Type', 'application/json');
+                res.json(content)
+            }
+        });
+}
+//get Carrier
+function getCarrierPublic(req, res) {
+  
+    var carrierId = req.swagger.params.carrierId.value;
+    var traceId = process.env.TRACE_VARIABLE|| "test";
+    (new Carrier()).getCarrier(traceId,carrierId,
         function (err, content) {
             if (err) {
                 res.end(JSON.stringify(err));

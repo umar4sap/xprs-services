@@ -16,6 +16,34 @@ securityDefinitions:
     name: Authorization
 
 paths:
+  /listing/carrier/{carrierId}/public:
+    get:
+      tags:
+      - "vendor access"
+      summary: "Post a list."
+      description: "user can post a  list"
+      operationId: "getCarrierPublic"
+      produces:
+      - "application/json"
+      security: 
+        - UserSecurity: []
+      parameters:  
+      - name: "carrierId"
+        in: "path"
+        type: "string"
+        required: true
+      responses:
+        200:
+          description: "lists details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new publishers"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "listService"
+  
   /listing/carrier/{carrierId}:
     put:
       tags:
@@ -105,14 +133,18 @@ paths:
         default:
           description: "Unexpected error"
       x-swagger-router-controller: "listService"
-    
-  /listing:
+  /listing/{pg}:
     get:
       tags:
-      - "vendor access"
+      - "public"
       summary: "Get all lists"
       description: "Get all lists"
-      operationId: "getList"   
+      operationId: "getListByPage"  
+      parameters: 
+      - name: "pg"
+        in: "path"
+        type: "number"
+        required: true
       produces:
       - "application/json"
       responses:
@@ -125,7 +157,7 @@ paths:
         default:
           description: "Unexpected error"
       x-swagger-router-controller: "listService"
-      
+  /listing:
     post:
       tags:
       - "vendor access"
@@ -238,7 +270,7 @@ paths:
         required: true
       - name: "pg"
         in: "path"
-        type: "string"
+        type: "number"
         required: true
       responses:
         200:

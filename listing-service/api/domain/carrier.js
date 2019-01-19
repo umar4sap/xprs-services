@@ -41,20 +41,29 @@ verification.prototype.getData = function () {
 // create new carrier for owner
 carrier.prototype.postCarrier =(traceId, userId , cb) => {
     carrier.prototype.data['createdDTS'] = moment.utc().format();
+    
     carrier.prototype.data['updatedDTS'] = moment.utc().format();
     var carrierMetadata = new CarrierMetadata(carrier.prototype.data).getData();
-    var carrierNameSpace=carrierMetadata.basicDetails.companyName+'-'+carrierMetadata.basicDetails.country+'-'+carrierMetadata.basicDetails.city+'-'+carrierMetadata.basicDetails.branch;
+    var carrierNameSpace=carrierMetadata.basicDetails.carrierName+'-'+carrierMetadata.basicDetails.country+'-'+carrierMetadata.basicDetails.city+'-'+carrierMetadata.basicDetails.locality;
     carrierMetadata.carrierNameSpace=carrierNameSpace;
+    carrierMetadata.expringDate=new Date(new Date().getTime()+(180*24*60*60*1000));
+    carrierMetadata.listedDate=new Date();
     carrierMetadata.userId=userId;
+    var response = {
+        message: "Cannot create the carrier.",
+        statusCode: 404,
+        errorCode: "code1"
+    }
      rdb.table("carrier").insert(carrierMetadata).run().then(function (carrierData) {
-             var resObj = { "status": "200", "data": { "message": "Your carrier is yet to publish"} }
+         console.log(JSON.stringify(carrierData.generated_keys[0]));
+             var resObj = { "status": "200", "data": { "message": "Your carrier is yet to publish and the Carrier id is -> "+ carrierData.generated_keys[0] } }
                     cb(null,resObj);
          
                 }).catch(function (err) {
                     console.log("first err catch")
                     log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
-                    var resObj = { "status": "404", "error": err };
-                    cb(resObj);
+                    
+                    cb(response);
                 });  
         }
 
@@ -102,31 +111,48 @@ carrier.prototype.deleteCarrier = (componentId, carrierId,orgId,traceId, tenantI
         cb(null, result);
     }).catch(function (err) {
         log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
-        var resObj = { "status": "404", "error": response }
-        cb(resObj);
+       
+        cb(response);
     });
 }
 
 // list all carrier for platform admin level
 carrier.prototype.findAllCarriersForAllcity = (traceId, startfrom,status,cb) => {
     var response = {
-        message: "Cannot Get all carrier.",
+        message: "Cannot Get all carrier issue with db.",
         statusCode: 404,
         errorCode: "code1"
     }
-    rdb.table("carrier").filter({"carrierStatus":status}).limit(10).run().then(function (result) {
+    rdb.table("carrier").filter({"carrierStatus":status}).skip(startfrom).limit(10).run().then(function (result) {
         var resObj = { "status": "200", "data": result }
         cb(null, resObj);
     }).catch(function (err) {
         log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
-        var resObj = { "status": "404", "error": response }
-        cb(resObj);
+        
+        cb(response);
+    });
+}
+
+// list all carrier for platform admin level
+carrier.prototype.findAllCarriersForAllcityPublic = (traceId, startfrom,cb) => {
+    var response = {
+        message: "Cannot Get all carrier issue with db.",
+        statusCode: 404,
+        errorCode: "code1"
+    }
+    rdb.table("carrier").filter({"carrierStatus":"publish"}).skip(startfrom).limit(10).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
+        var resObj = { "status": "200", "data": result }
+        cb(null, resObj);
+    }).catch(function (err) {
+        log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
+        
+        cb(response);
     });
 }
 
 // Getpublished carrier by cityId
 carrier.prototype.getcityCarriersList = (traceId, cityId, cb) => {
-    rdb.table("carrier").filter({"basicDetails":{ "city": cityId},"carrierStatus":"publish"}).without('verificationDetails').run().then(function (result) {
+    rdb.table("carrier").filter({"basicDetails":{ "city": cityId},"carrierStatus":"publish"}).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
 
         if (result.length > 0) {
                         var resObj = { "status": "200", "data": result }
@@ -145,7 +171,7 @@ carrier.prototype.getcityCarriersList = (traceId, cityId, cb) => {
 
 // Getpublished carrier by Country
 carrier.prototype.getCountryCarriersList = (traceId, CountryId, cb) => {
-    rdb.table("carrier").filter({"basicDetails":{ country: CountryId},carrierStatus:"publish"}).without('verificationDetails').run().then(function (result) {
+    rdb.table("carrier").filter({"basicDetails":{ country: CountryId},carrierStatus:"publish"}).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
 
         if (result.length > 0) {
                         var resObj = { "status": "200", "data": result }
@@ -202,6 +228,24 @@ carrier.prototype.ownerCarriers = (traceId, userId, cb) => {
 
 // Get carrierId for vendor
 carrier.prototype.getOneCarrier = (traceId, carrierId, cb) => {
+    rdb.table("carrier").filter({carrierId:carrierId}).without('verificationDetails').run().then(function (result) {
+
+        if (result.length > 0) {
+                        var resObj = { "status": "200", "data": result }
+                        cb(null, resObj);
+                
+        } else {
+            var resObj = { "status": "200", "data": result }
+            cb(null, resObj);
+        }
+    }).catch(function (err) {
+        log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
+        var resObj = { "status": "404", "error": err }
+        cb(resObj);
+    })
+}
+
+carrier.prototype.getCarrier = (traceId, carrierId, cb) => {
     rdb.table("carrier").filter({carrierId:carrierId}).without('verificationDetails').run().then(function (result) {
 
         if (result.length > 0) {

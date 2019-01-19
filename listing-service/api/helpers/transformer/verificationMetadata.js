@@ -13,6 +13,7 @@ function verificationMetadata(data, userId, tenantId,orgId) {
    
     verificationMetadata.prototype.verification.verificationDetails = carrierdata.verificationDetails
     verificationMetadata.prototype.verification.carrierStatus = carrierdata.status;
+    verificationMetadata.prototype.verification.carrierVerificationStatus = carrierdata.carrierVerificationStatus;
     verificationMetadata.prototype.verification.updatedDTS = carrierdata.updatedDTS;
     verificationMetadata.prototype.verification.updatedBy = carrierdata.updatedBy;
 
