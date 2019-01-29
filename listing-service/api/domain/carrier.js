@@ -124,8 +124,29 @@ carrier.prototype.findAllCarriersForAllcity = (traceId, startfrom,status,cb) => 
         errorCode: "code1"
     }
     rdb.table("carrier").filter({"carrierStatus":status}).skip(startfrom).limit(10).run().then(function (result) {
-        var resObj = { "status": "200", "data": result }
-        cb(null, resObj);
+       
+        if (result.length > 0) {
+            rdb.table("carrier").filter({"carrierStatus":status}).count().run().then(function (result2) {
+
+                if (result.length > 0) {
+                                var resObj = { "status": "200", "data": result,"count":result2}
+                                cb(null, resObj);
+                        
+                } else {
+                    var resObj = { "status": "200", "data":  result,"count":result2 }
+                    cb(null, resObj);
+                }
+            }).catch(function (err) {
+                var resObj = { "status": "200", "data":  result,"count":"count db error" }
+                    cb(null, resObj);
+            })
+        
+        } else {
+            var resObj = { "status": "200", "data": result ,"count":0}
+            cb(null, resObj);
+        }
+        
+       
     }).catch(function (err) {
         log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
         
@@ -153,13 +174,27 @@ carrier.prototype.findAllCarriersForAllcityPublic = (traceId, startfrom,cb) => {
 // Getpublished carrier by cityId
 carrier.prototype.getcityCarriersList = (traceId, cityId, cb) => {
     rdb.table("carrier").filter({"basicDetails":{ "city": cityId},"carrierStatus":"publish"}).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
-
+  
         if (result.length > 0) {
-                        var resObj = { "status": "200", "data": result }
-                        cb(null, resObj);
+
+            rdb.table("carrier").filter({"basicDetails":{ "city": cityId},"carrierStatus":"publish"}).count().run().then(function (result2) {
+
+                if (result.length > 0) {
+                                var resObj = { "status": "200", "data": result,"count":result2}
+                                cb(null, resObj);
+                        
+                } else {
+                    var resObj = { "status": "200", "data":  result,"count":result2 }
+                    cb(null, resObj);
+                }
+            }).catch(function (err) {
+                var resObj = { "status": "200", "data":  result,"count":"count db error" }
+                    cb(null, resObj);
+            })
+                       
                 
         } else {
-            var resObj = { "status": "200", "data": result }
+            var resObj = { "status": "200", "data": result,"count": 0 }
             cb(null, resObj);
         }
     }).catch(function (err) {
@@ -174,11 +209,23 @@ carrier.prototype.getCountryCarriersList = (traceId, CountryId, cb) => {
     rdb.table("carrier").filter({"basicDetails":{ country: CountryId},carrierStatus:"publish"}).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
 
         if (result.length > 0) {
-                        var resObj = { "status": "200", "data": result }
-                        cb(null, resObj);
+            rdb.table("carrier").filter({"basicDetails":{ "country": CountryId},"carrierStatus":"publish"}).count().run().then(function (result2) {
+
+                if (result.length > 0) {
+                                var resObj = { "status": "200", "data": result,"count":result2}
+                                cb(null, resObj);
+                        
+                } else {
+                    var resObj = { "status": "200", "data":  result,"count":result2 }
+                    cb(null, resObj);
+                }
+            }).catch(function (err) {
+                var resObj = { "status": "200", "data":  result,"count":"count db error" }
+                    cb(null, resObj);
+            })
                 
         } else {
-            var resObj = { "status": "200", "data": result }
+            var resObj = { "status": "200", "data": result ,"count":0}
             cb(null, resObj);
         }
     }).catch(function (err) {
@@ -193,8 +240,10 @@ carrier.prototype.getcityCarriersListByServiceType = (traceId, cityId, type,cb) 
     rdb.table("carrier").filter({'basicDetails':{'city':cityId}}).filter(rdb.row('services')('modeType').contains(type)).without('verificationDetails').run().then(function (result){
 
         if (result.length > 0){
-                        var resObj = { "status": "200", "data": result }
-                        cb(null, resObj);
+            
+            var resObj = { "status": "200", "data": result }
+            cb(null, resObj);
+            
                 
         } else {
             var resObj = { "status": "200", "data": result }

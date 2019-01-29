@@ -23,6 +23,7 @@ module.exports = {
     getCarrier:getCarrier,
     getCarrierPublic:getCarrierPublic,
     getCarriersAllInReview:getCarriersAllInReview,
+   
     updateCarrierVerification:updateCarrierVerification,
     getListByPage:getListByPage
    

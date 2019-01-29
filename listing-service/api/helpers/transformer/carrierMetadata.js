@@ -46,7 +46,7 @@ function carrierMetadata(data, userId, tenantId,orgId) {
 
 
 
-    carrierMetadata.prototype.carrier.services=carrierdata.services?carrierdata.services:{}
+    carrierMetadata.prototype.carrier.services=carrierdata.services?carrierdata.services:[]
 
 
     carrierMetadata.prototype.carrier.lanesAndRoutes = carrierdata.lanesAndRoutes?carrierdata.lanesAndRoutes:{};
@@ -56,10 +56,11 @@ function carrierMetadata(data, userId, tenantId,orgId) {
   //  carrierMetadata.prototype.carrier.tags = carrierdata.tags;
 
 
-    carrierMetadata.prototype.carrier.timingHours=carrierdata.timingHours?carrierdata.timingHours:{};
-    carrierMetadata.prototype.carrier.timingHours.Days = carrierdata.timingHours?carrierdata.timingHours.Days:"not provided";
-    carrierMetadata.prototype.carrier.timingHours.from = carrierdata.timingHours?carrierdata.timingHours.from:"not provided";
-    carrierMetadata.prototype.carrier.timingHours.to = carrierdata.timingHours?carrierdata.timingHours.from:"not provided";
+    carrierMetadata.prototype.carrier.timingHours=carrierdata.timingHours?carrierdata.timingHours:[];
+
+    // carrierMetadata.prototype.carrier.timingHours.Days = carrierdata.timingHours?carrierdata.timingHours.Days:"not provided";
+    // carrierMetadata.prototype.carrier.timingHours.from = carrierdata.timingHours?carrierdata.timingHours.from:"not provided";
+    // carrierMetadata.prototype.carrier.timingHours.to = carrierdata.timingHours?carrierdata.timingHours.from:"not provided";
     
     carrierMetadata.prototype.carrier.verificationDetails = {}
 
