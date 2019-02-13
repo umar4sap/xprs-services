@@ -125,27 +125,21 @@ carrier.prototype.findAllCarriersForAllcity = (traceId, startfrom,status,cb) => 
     }
     if(status=="all"){
         rdb.table("carrier").skip(startfrom).limit(10).run().then(function (result) {
-       
+            rdb.table("carrier").count().run().then(function (result2) {
             if (result.length > 0) {
-                rdb.table("carrier").count().run().then(function (result2) {
-    
-                    if (result.length > 0) {
                                     var resObj = { "status": "200", "data": result,"count":result2}
                                     cb(null, resObj);
-                            
-                    } else {
-                        var resObj = { "status": "200", "data":  result,"count":result2 }
-                        cb(null, resObj);
-                    }
+                } else {
+                    var resObj = { "status": "200", "data": result ,"count":result2}
+                    cb(null, resObj);
+                }
+
                 }).catch(function (err) {
                     var resObj = { "status": "200", "data":  result,"count":"count db error" }
                         cb(null, resObj);
                 })
             
-            } else {
-                var resObj = { "status": "200", "data": result ,"count":0}
-                cb(null, resObj);
-            }
+            
             
            
         }).catch(function (err) {
@@ -157,27 +151,22 @@ carrier.prototype.findAllCarriersForAllcity = (traceId, startfrom,status,cb) => 
 
     
     rdb.table("carrier").filter({"carrierStatus":status}).skip(startfrom).limit(10).run().then(function (result) {
-       
+        rdb.table("carrier").filter({"carrierStatus":status}).count().run().then(function (result2) {
         if (result.length > 0) {
-            rdb.table("carrier").filter({"carrierStatus":status}).count().run().then(function (result2) {
-
-                if (result.length > 0) {
                                 var resObj = { "status": "200", "data": result,"count":result2}
                                 cb(null, resObj);
                         
-                } else {
-                    var resObj = { "status": "200", "data":  result,"count":result2 }
-                    cb(null, resObj);
-                }
+                
+            } else {
+                var resObj = { "status": "200", "data": result ,"count":result2}
+                cb(null, resObj);
+            }
             }).catch(function (err) {
                 var resObj = { "status": "200", "data":  result,"count":"count db error" }
                     cb(null, resObj);
             })
         
-        } else {
-            var resObj = { "status": "200", "data": result ,"count":0}
-            cb(null, resObj);
-        }
+       
         
        
     }).catch(function (err) {
