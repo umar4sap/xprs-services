@@ -123,6 +123,39 @@ carrier.prototype.findAllCarriersForAllcity = (traceId, startfrom,status,cb) => 
         statusCode: 404,
         errorCode: "code1"
     }
+    if(status=="all"){
+        rdb.table("carrier").skip(startfrom).limit(10).run().then(function (result) {
+       
+            if (result.length > 0) {
+                rdb.table("carrier").count().run().then(function (result2) {
+    
+                    if (result.length > 0) {
+                                    var resObj = { "status": "200", "data": result,"count":result2}
+                                    cb(null, resObj);
+                            
+                    } else {
+                        var resObj = { "status": "200", "data":  result,"count":result2 }
+                        cb(null, resObj);
+                    }
+                }).catch(function (err) {
+                    var resObj = { "status": "200", "data":  result,"count":"count db error" }
+                        cb(null, resObj);
+                })
+            
+            } else {
+                var resObj = { "status": "200", "data": result ,"count":0}
+                cb(null, resObj);
+            }
+            
+           
+        }).catch(function (err) {
+            log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
+            
+            cb(response);
+        });
+    }else{
+
+    
     rdb.table("carrier").filter({"carrierStatus":status}).skip(startfrom).limit(10).run().then(function (result) {
        
         if (result.length > 0) {
@@ -152,6 +185,7 @@ carrier.prototype.findAllCarriersForAllcity = (traceId, startfrom,status,cb) => 
         
         cb(response);
     });
+}
 }
 
 // list all carrier for platform admin level
