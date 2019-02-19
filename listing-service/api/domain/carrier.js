@@ -101,16 +101,16 @@ carrier.prototype.updateCarrierVerification =(traceId, carrierId ,userId, cb) =>
         }
 
 // delete carrier
-carrier.prototype.deleteCarrier = (componentId, carrierId,orgId,traceId, tenantId, cb) => {
+carrier.prototype.deleteCarrier = ( carrierId,orgId,traceId, tenantId, cb) => {
     var response = {
         message: "Cannot Delete the carrier.",
         statusCode: 404,
         errorCode: "code1"
     }
-    rdb.table("carriersandratings").filter({"componentId": componentId,"carrierId":carrierId}).delete().run().then(function (result) {
+    rdb.table("carrier").get(carrierId).delete().run().then(function (result) {
         cb(null, result);
     }).catch(function (err) {
-        log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
+        log.error("TraceId : %s, Error : %s", "traceId", JSON.stringify(err));
        
         cb(response);
     });

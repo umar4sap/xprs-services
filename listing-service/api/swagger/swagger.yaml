@@ -133,6 +133,32 @@ paths:
         default:
           description: "Unexpected error"
       x-swagger-router-controller: "listService"
+    delete:
+      tags:
+      - "vendor access"
+      summary: "Post a list."
+      description: "user can post a  list"
+      operationId: "deleteCarrier"
+      produces:
+      - "application/json"
+      security: 
+        - UserSecurity: []
+      parameters:  
+      - name: "carrierId"
+        in: "path"
+        type: "string"
+        required: true
+      responses:
+        200:
+          description: "lists details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new publishers"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "listService"
   /listing/{pg}:
     get:
       tags:

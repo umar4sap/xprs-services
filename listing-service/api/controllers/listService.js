@@ -23,7 +23,7 @@ module.exports = {
     getCarrier:getCarrier,
     getCarrierPublic:getCarrierPublic,
     getCarriersAllInReview:getCarriersAllInReview,
-   
+    deleteCarrier:deleteCarrier,
     updateCarrierVerification:updateCarrierVerification,
     getListByPage:getListByPage
    
@@ -159,20 +159,20 @@ function deleteCarrier(req, res) {
     var tenantId = req.user.aud;
     var orgId = req.swagger.params.orgId.value;
     var CarrierId = req.swagger.params.CarrierId.value;
-    var cityId = req.swagger.params.cityId.value;
+  //  var cityId = req.swagger.params.cityId.value;
     var currentPermissionsOrgs = req.user["https://sysgain.newgen.com/app_metadata"].permissions.orgs;
     var userType;
     currentUserType(currentPermissionsOrgs, orgId, function (data) {
         userType = data;
     });
     if(userType=="admin"){
-    (new Carrier()).deleteCarrier(cityId, CarrierId,orgId,traceId, tenantId, function (err, result) {
+    (new Carrier()).deleteCarrier( CarrierId,orgId,traceId, tenantId, function (err, result) {
         if (err) {
             log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
             throw err;
         }
         if (result.deleted == 0) {
-            var resObj = { "status": "200", "data": { "message": "Publisher does not exist" } }
+            var resObj = { "status": "200", "data": { "message": "carrier does not exist" } }
             res.set('Content-Type', 'application/json');
             res.json(resObj);
         } else {

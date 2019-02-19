@@ -13,7 +13,6 @@ function carrierMetadata(data, userId, tenantId,orgId) {
         carrierdata = data;
     }
     carrierMetadata.prototype.carrier.basicDetails={};
-   
     carrierMetadata.prototype.carrier.basicDetails.entityType = carrierdata.basicDetails.entityType;
     carrierMetadata.prototype.carrier.basicDetails.carrierName = carrierdata.basicDetails.carrierName;
     carrierMetadata.prototype.carrier.basicDetails.carrierPhoto = carrierdata.basicDetails.carrierPhoto ? carrierdata.basicDetails.carrierPhoto : "None" ;
