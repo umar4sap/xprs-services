@@ -16,6 +16,161 @@ securityDefinitions:
     name: Authorization
 
 paths:
+  /networks/{carrierId}/:
+    post:
+      tags:
+      - "network create"
+      summary: "Post a network."
+      description: "user can post a network"
+      operationId: "createNetworkForCarrier"
+      security: 
+        - UserSecurity: []
+      produces:
+      - "application/json"
+      parameters:  
+      - name: "carrierId"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/updatelist"
+      responses:
+        200:
+          description: "lists details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new publishers"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "networkService"
+    get:
+      tags:
+      - "vendor access"
+      summary: "Post a list."
+      description: "user can post a  list"
+      operationId: "getNetworkForCarrier"
+      produces:
+      - "application/json"
+      security: 
+        - UserSecurity: []
+      parameters:  
+      - name: "carrierId"
+        in: "path"
+        type: "string"
+        required: true
+      responses:
+        200:
+          description: "lists details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new publishers"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "networkService"
+  /networks/{carrierId}/network/{networkId}:
+    put:
+      tags:
+      - "vendor access"
+      summary: "Post a list."
+      description: "user can post a  list"
+      operationId: "updateNetworkForCarrier"
+      produces:
+      - "application/json"
+      security: 
+        - UserSecurity: []
+      parameters:  
+      - name: "carrierId"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "networkId"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "body"
+        in: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/updatelist"
+      responses:
+        200:
+          description: "lists details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new publishers"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "networkService"
+    delete:
+      tags:
+      - "vendor access"
+      summary: "Post a list."
+      description: "user can post a  list"
+      operationId: "deleteNetworkForCarrier"
+      produces:
+      - "application/json"
+      security: 
+        - UserSecurity: []
+      parameters:  
+      - name: "carrierId"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "networkId"
+        in: "path"
+        type: "string"
+        required: true
+      responses:
+        200:
+          description: "lists details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new publishers"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "networkService"
+    get:
+      tags:
+      - "vendor access"
+      summary: "Post a list."
+      description: "user can post a  list"
+      operationId: "getNetworkForCarrierById"
+      produces:
+      - "application/json"
+      security: 
+        - UserSecurity: []
+      parameters:  
+      - name: "carrierId"
+        in: "path"
+        type: "string"
+        required: true
+      - name: "networkId"
+        in: "path"
+        type: "string"
+        required: true
+      responses:
+        200:
+          description: "lists details"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Error creating a new publishers"
+        default:
+          description: "Unexpected error"
+      x-swagger-router-controller: "networkService"
+  
   /listing/carrier/{carrierId}/public:
     get:
       tags:

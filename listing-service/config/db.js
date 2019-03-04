@@ -9,6 +9,10 @@ module.exports = {
         {
             table: "carrier",
             id:"carrierId"
+        },
+        {
+            table: "network",
+            id:"networkId"
         }
     ]
 }
