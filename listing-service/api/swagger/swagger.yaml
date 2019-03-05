@@ -439,7 +439,8 @@ paths:
               $ref: '#/definitions/list'
         default:
           description: Unexpected error
-  /swagger: {}
+  /swagger: 
+    x-swagger-pipe: swagger_raw
 definitions:
   list:
     type: object
