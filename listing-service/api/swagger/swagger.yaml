@@ -1,481 +1,454 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  description: "xprs services"
-  version: "0.0.1"
-  title: "xprs  services"
+  description: xprs services
+  version: 0.0.1
+  title: xprs  services
   contact:
-    name:  xprs API Support
+    name: xprs API Support
     email: m.jumar@hotmail.com
-basePath: "/xprs/services/carrier-listing-service"
+basePath: /xprs/services/carrier-listing-service
 schemes:
-- "http"
+  - http
 securityDefinitions:
   UserSecurity:
     type: apiKey
     in: header
     name: Authorization
-
 paths:
-  /networks/{carrierId}/:
+  '/networks/{carrierId}/':
     post:
       tags:
-      - "network create"
-      summary: "Post a network."
-      description: "user can post a network"
-      operationId: "createNetworkForCarrier"
-      security: 
+        - network private
+      summary: Post a network.
+      description: user can post a network
+      operationId: createNetworkForCarrier
+      security:
         - UserSecurity: []
       produces:
-      - "application/json"
-      parameters:  
-      - name: "carrierId"
-        in: "path"
-        type: "string"
-        required: true
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/updatelist"
-      responses:
-        200:
-          description: "lists details"
+        - application/json
+      parameters:
+        - name: carrierId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
           schema:
-            type: "object"
+            $ref: '#/definitions/updatelist'
+      responses:
+        '200':
+          description: lists details
+          schema:
+            type: object
             properties: {}
-        400:
-          description: "Error creating a new publishers"
+        '400':
+          description: Error creating a new publishers
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "networkService"
+          description: Unexpected error
     get:
       tags:
-      - "vendor access"
-      summary: "Post a list."
-      description: "user can post a  list"
-      operationId: "getNetworkForCarrier"
+        - networks public
+      summary: get all  network for a carrier.
+      description: user can post a  list
+      operationId: getNetworkForCarrier
       produces:
-      - "application/json"
-      security: 
-        - UserSecurity: []
-      parameters:  
-      - name: "carrierId"
-        in: "path"
-        type: "string"
-        required: true
+        - application/json
+      parameters:
+        - name: carrierId
+          in: path
+          type: string
+          required: true
       responses:
-        200:
-          description: "lists details"
+        '200':
+          description: lists details
           schema:
-            type: "object"
+            type: object
             properties: {}
-        400:
-          description: "Error creating a new publishers"
+        '400':
+          description: Error creating a new publishers
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "networkService"
-  /networks/{carrierId}/network/{networkId}:
+          description: Unexpected error
+  '/networks/{carrierId}/network/{networkId}':
     put:
       tags:
-      - "vendor access"
-      summary: "Post a list."
-      description: "user can post a  list"
-      operationId: "updateNetworkForCarrier"
+        - network private
+      summary: update a carrier.
+      description: user can post a  list
+      operationId: updateNetworkForCarrier
       produces:
-      - "application/json"
-      security: 
+        - application/json
+      security:
         - UserSecurity: []
-      parameters:  
-      - name: "carrierId"
-        in: "path"
-        type: "string"
-        required: true
-      - name: "networkId"
-        in: "path"
-        type: "string"
-        required: true
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/updatelist"
-      responses:
-        200:
-          description: "lists details"
+      parameters:
+        - name: carrierId
+          in: path
+          type: string
+          required: true
+        - name: networkId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
           schema:
-            type: "object"
+            $ref: '#/definitions/updatelist'
+      responses:
+        '200':
+          description: lists details
+          schema:
+            type: object
             properties: {}
-        400:
-          description: "Error creating a new publishers"
+        '400':
+          description: Error creating a new publishers
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "networkService"
+          description: Unexpected error
     delete:
       tags:
-      - "vendor access"
-      summary: "Post a list."
-      description: "user can post a  list"
-      operationId: "deleteNetworkForCarrier"
+        - network private
+      summary: delete a carrier.
+      description: user can post a  list
+      operationId: deleteNetworkForCarrier
       produces:
-      - "application/json"
-      security: 
+        - application/json
+      security:
         - UserSecurity: []
-      parameters:  
-      - name: "carrierId"
-        in: "path"
-        type: "string"
-        required: true
-      - name: "networkId"
-        in: "path"
-        type: "string"
-        required: true
+      parameters:
+        - name: carrierId
+          in: path
+          type: string
+          required: true
+        - name: networkId
+          in: path
+          type: string
+          required: true
       responses:
-        200:
-          description: "lists details"
+        '200':
+          description: lists details
           schema:
-            type: "object"
+            type: object
             properties: {}
-        400:
-          description: "Error creating a new publishers"
+        '400':
+          description: Error creating a new publishers
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "networkService"
+          description: Unexpected error
     get:
       tags:
-      - "vendor access"
-      summary: "Post a list."
-      description: "user can post a  list"
-      operationId: "getNetworkForCarrierById"
+        - networks public
+      summary: Post a list.
+      description: user
+      operationId: getNetworkForCarrierById
       produces:
-      - "application/json"
-      security: 
-        - UserSecurity: []
-      parameters:  
-      - name: "carrierId"
-        in: "path"
-        type: "string"
-        required: true
-      - name: "networkId"
-        in: "path"
-        type: "string"
-        required: true
+        - application/json
+      parameters:
+        - name: carrierId
+          in: path
+          type: string
+          required: true
+        - name: networkId
+          in: path
+          type: string
+          required: true
       responses:
-        200:
-          description: "lists details"
+        '200':
+          description: lists details
           schema:
-            type: "object"
+            type: object
             properties: {}
-        400:
-          description: "Error creating a new publishers"
+        '400':
+          description: Error creating a new publishers
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "networkService"
-  
-  /listing/carrier/{carrierId}/public:
+          description: Unexpected error
+  '/listing/carrier/{carrierId}/public':
     get:
       tags:
-      - "vendor access"
-      summary: "Post a list."
-      description: "user can post a  list"
-      operationId: "getCarrierPublic"
+        - vendor access
+      summary: Post a list.
+      description: user can post a  list
+      operationId: getCarrierPublic
       produces:
-      - "application/json"
-      security: 
+        - application/json
+      security:
         - UserSecurity: []
-      parameters:  
-      - name: "carrierId"
-        in: "path"
-        type: "string"
-        required: true
+      parameters:
+        - name: carrierId
+          in: path
+          type: string
+          required: true
       responses:
-        200:
-          description: "lists details"
+        '200':
+          description: lists details
           schema:
-            type: "object"
+            type: object
             properties: {}
-        400:
-          description: "Error creating a new publishers"
+        '400':
+          description: Error creating a new publishers
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "listService"
-  
-  /listing/carrier/{carrierId}:
+          description: Unexpected error
+  '/listing/carrier/{carrierId}':
     put:
       tags:
-      - "vendor access"
-      summary: "Post a list."
-      description: "user can post a  list"
-      operationId: "updateCarrier"
+        - vendor access
+      summary: Post a list.
+      description: user can post a  list
+      operationId: updateCarrier
       produces:
-      - "application/json"
-      security: 
+        - application/json
+      security:
         - UserSecurity: []
-      parameters:  
-      - name: "carrierId"
-        in: "path"
-        type: "string"
-        required: true
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/updatelist"
-      responses:
-        200:
-          description: "lists details"
+      parameters:
+        - name: carrierId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
           schema:
-            type: "object"
+            $ref: '#/definitions/updatelist'
+      responses:
+        '200':
+          description: lists details
+          schema:
+            type: object
             properties: {}
-        400:
-          description: "Error creating a new publishers"
+        '400':
+          description: Error creating a new publishers
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "listService"
+          description: Unexpected error
     patch:
       tags:
-      - "vendor access"
-      summary: "Post a list."
-      description: "user can post a  list"
-      operationId: "updateCarrierVerification"
+        - vendor access
+      summary: Post a list.
+      description: user can post a  list
+      operationId: updateCarrierVerification
       produces:
-      - "application/json"
-      security: 
+        - application/json
+      security:
         - UserSecurity: []
-      parameters:  
-      - name: "carrierId"
-        in: "path"
-        type: "string"
-        required: true
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/updatelist"
-      responses:
-        200:
-          description: "lists details"
+      parameters:
+        - name: carrierId
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          required: true
           schema:
-            type: "object"
+            $ref: '#/definitions/updatelist'
+      responses:
+        '200':
+          description: lists details
+          schema:
+            type: object
             properties: {}
-        400:
-          description: "Error creating a new publishers"
+        '400':
+          description: Error creating a new publishers
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "listService"
+          description: Unexpected error
     get:
       tags:
-      - "vendor access"
-      summary: "Post a list."
-      description: "user can post a  list"
-      operationId: "getCarrier"
+        - vendor access
+      summary: Post a list.
+      description: user can post a  list
+      operationId: getCarrier
       produces:
-      - "application/json"
-      security: 
+        - application/json
+      security:
         - UserSecurity: []
-      parameters:  
-      - name: "carrierId"
-        in: "path"
-        type: "string"
-        required: true
+      parameters:
+        - name: carrierId
+          in: path
+          type: string
+          required: true
       responses:
-        200:
-          description: "lists details"
+        '200':
+          description: lists details
           schema:
-            type: "object"
+            type: object
             properties: {}
-        400:
-          description: "Error creating a new publishers"
+        '400':
+          description: Error creating a new publishers
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "listService"
+          description: Unexpected error
     delete:
       tags:
-      - "vendor access"
-      summary: "Post a list."
-      description: "user can post a  list"
-      operationId: "deleteCarrier"
+        - vendor access
+      summary: Post a list.
+      description: user can post a  list
+      operationId: deleteCarrier
       produces:
-      - "application/json"
-      security: 
+        - application/json
+      security:
         - UserSecurity: []
-      parameters:  
-      - name: "carrierId"
-        in: "path"
-        type: "string"
-        required: true
+      parameters:
+        - name: carrierId
+          in: path
+          type: string
+          required: true
       responses:
-        200:
-          description: "lists details"
+        '200':
+          description: lists details
           schema:
-            type: "object"
+            type: object
             properties: {}
-        400:
-          description: "Error creating a new publishers"
+        '400':
+          description: Error creating a new publishers
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "listService"
-  /listing/{pg}:
+          description: Unexpected error
+  '/listing/{pg}':
     get:
       tags:
-      - "public"
-      summary: "Get all lists"
-      description: "Get all lists"
-      operationId: "getListByPage"  
-      parameters: 
-      - name: "pg"
-        in: "path"
-        type: "number"
-        required: true
+        - public
+      summary: Get all lists
+      description: Get all lists
+      operationId: getListByPage
+      parameters:
+        - name: pg
+          in: path
+          type: number
+          required: true
       produces:
-      - "application/json"
+        - application/json
       responses:
-        200:
-          description: "A list of lists."
+        '200':
+          description: A list of lists.
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/list"
+              $ref: '#/definitions/list'
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "listService"
+          description: Unexpected error
   /listing:
     post:
       tags:
-      - "vendor access"
-      summary: "Post a list."
-      description: "user can post a  list"
-      operationId: "addCarrier"
+        - vendor access
+      summary: Post a list.
+      description: user can post a  list
+      operationId: addCarrier
       produces:
-      - "application/json"
-      security: 
+        - application/json
+      security:
         - UserSecurity: []
-      parameters: 
-      - name: "body"
-        in: "body"
-        required: true
-        schema:
-          $ref: "#/definitions/list"
-      responses:
-        200:
-          description: "lists details"
+      parameters:
+        - name: body
+          in: body
+          required: true
           schema:
-            type: "object"
+            $ref: '#/definitions/list'
+      responses:
+        '200':
+          description: lists details
+          schema:
+            type: object
             properties: {}
-        400:
-          description: "Error creating a new publishers"
+        '400':
+          description: Error creating a new publishers
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "listService"
-    
-  /list/city/{cityName}:
+          description: Unexpected error
+  '/list/city/{cityName}':
     get:
       tags:
-      - "vendor access"
-      summary: "Get all lists"
-      description: "Get all lists"
-      operationId: "getcityCarriers"  
-      parameters: 
-      - name: "cityName"
-        in: "path"
-        type: "string"
-        required: true
+        - vendor access
+      summary: Get all lists
+      description: Get all lists
+      operationId: getcityCarriers
+      parameters:
+        - name: cityName
+          in: path
+          type: string
+          required: true
       responses:
-        200:
-          description: "A list of lists."
+        '200':
+          description: A list of lists.
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/list"
+              $ref: '#/definitions/list'
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "listService"
-  /list/country/{countryName}:
+          description: Unexpected error
+  '/list/country/{countryName}':
     get:
       tags:
-      - "vendor access"
-      summary: "Get all lists"
-      description: "Get all lists"
-      operationId: "getCountryCarriers"  
-      parameters: 
-      - name: "countryName"
-        in: "path"
-        type: "string"
-        required: true
+        - vendor access
+      summary: Get all lists
+      description: Get all lists
+      operationId: getCountryCarriers
+      parameters:
+        - name: countryName
+          in: path
+          type: string
+          required: true
       responses:
-        200:
-          description: "A list of lists."
+        '200':
+          description: A list of lists.
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/list"
+              $ref: '#/definitions/list'
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "listService"
-  /list/city/{cityName}/serviceType/{serviceType}:
+          description: Unexpected error
+  '/list/city/{cityName}/serviceType/{serviceType}':
     get:
       tags:
-      - "vendor access"
-      summary: "Get all lists"
-      description: "Get all lists"
-      operationId: "getcityCarriersListByServiceType"  
-      parameters: 
-      - name: "cityName"
-        in: "path"
-        type: "string"
-        required: true
-      - name: "serviceType"
-        in: "path"
-        type: "string"
-        required: true
+        - vendor access
+      summary: Get all lists
+      description: Get all lists
+      operationId: getcityCarriersListByServiceType
+      parameters:
+        - name: cityName
+          in: path
+          type: string
+          required: true
+        - name: serviceType
+          in: path
+          type: string
+          required: true
       responses:
-        200:
-          description: "A list of lists."
+        '200':
+          description: A list of lists.
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/list"
+              $ref: '#/definitions/list'
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "listService"
-  /list/carriers/{status}/page/{pg}:
+          description: Unexpected error
+  '/list/carriers/{status}/page/{pg}':
     get:
       tags:
-      - "vendor access"
-      summary: "Get all lists"
-      description: "Get all lists"
-      operationId: "getCarriersAllInReview"  
-      parameters: 
-      - name: "status"
-        in: "path"
-        type: "string"
-        required: true
-      - name: "pg"
-        in: "path"
-        type: "number"
-        required: true
+        - vendor access
+      summary: Get all lists
+      description: Get all lists
+      operationId: getCarriersAllInReview
+      parameters:
+        - name: status
+          in: path
+          type: string
+          required: true
+        - name: pg
+          in: path
+          type: number
+          required: true
       responses:
-        200:
-          description: "A list of lists."
+        '200':
+          description: A list of lists.
           schema:
-            type: "array"
+            type: array
             items:
-              $ref: "#/definitions/list"
+              $ref: '#/definitions/list'
         default:
-          description: "Unexpected error"
-      x-swagger-router-controller: "listService"
- 
-      
-  /swagger:
-    x-swagger-pipe: swagger_raw
-definitions:  
+          description: Unexpected error
+  /swagger: {}
+definitions:
   list:
-    type: "object"
-    required: ['basicDetails']
+    type: object
+    required:
+      - basicDetails
     properties:
-     basicDetails:
-          $ref: "#/definitions/basicDetails"
+      basicDetails:
+        $ref: '#/definitions/basicDetails'
   basicDetails:
-       type: "object"
+    type: object
   updatelist:
-    type: "object"
-        
+    type: object

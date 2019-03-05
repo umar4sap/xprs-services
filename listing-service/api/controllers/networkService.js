@@ -60,10 +60,10 @@ function createNetworkForCarrier(req, res) {
                 }
 
                 function getNetworkForCarrier(req, res) {
-                    var tokenId = req.headers.authorization;
-                    var userId = req.user.sub.split("|")[1];
+                //    var tokenId = req.headers.authorization;
+                //    var userId = req.user.sub.split("|")[1];
                     var traceId = "test";
-                    var tenantId = req.user.aud;
+                //    var tenantId = req.user.aud;
                     var carrierId = req.swagger.params.carrierId.value;
                     //var userType= req.user[URL].userType;
                   //  var networkId = req.swagger.params.networkId.value;
@@ -107,10 +107,10 @@ function createNetworkForCarrier(req, res) {
                                 }
                 
                                 function getNetworkForCarrierById(req, res) {
-                                    var tokenId = req.headers.authorization;
-                                    var userId = req.user.sub.split("|")[1];
+                                  //  var tokenId = req.headers.authorization;
+                                 //   var userId = req.user.sub.split("|")[1];
                                     var traceId = "test";
-                                    var tenantId = req.user.aud;
+                                  //  var tenantId = req.user.aud;
                                     var carrierId = req.swagger.params.carrierId.value;
                                     //var userType= req.user[URL].userType;
                                     var networkId = req.swagger.params.networkId.value;
