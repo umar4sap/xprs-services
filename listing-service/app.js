@@ -77,7 +77,7 @@ SwaggerRestify.create(config, function(err, swaggerRestify) {
     if (err) { throw err; }
     swaggerRestify.register(app);
     if (swaggerRestify.runner.swagger.paths['/swagger']) {
-        console.log('try this:\ncurl http://127.0.0.1:%d/v2/components/carrier-listing-service/swagger', port);
+        console.log('try this:\ncurl http://127.0.0.1:%d/xprs/services/carrier-listing-service/swagger', port);
     }
 });
 
