@@ -16,6 +16,7 @@ securityDefinitions:
     name: Authorization
 paths:
   '/networks/{carrierId}/':
+    x-swagger-router-controller: networkService
     post:
       tags:
         - network private
@@ -70,6 +71,7 @@ paths:
         default:
           description: Unexpected error
   '/networks/{carrierId}/network/{networkId}':
+    x-swagger-router-controller: networkService
     put:
       tags:
         - network private
@@ -161,6 +163,7 @@ paths:
         default:
           description: Unexpected error
   '/listing/carrier/{carrierId}/public':
+    x-swagger-router-controller: listingService
     get:
       tags:
         - vendor access
@@ -187,6 +190,7 @@ paths:
         default:
           description: Unexpected error
   '/listing/carrier/{carrierId}':
+    x-swagger-router-controller: listingService
     put:
       tags:
         - vendor access
@@ -298,6 +302,7 @@ paths:
         default:
           description: Unexpected error
   '/listing/{pg}':
+    x-swagger-router-controller: listingService
     get:
       tags:
         - public
@@ -320,7 +325,8 @@ paths:
               $ref: '#/definitions/list'
         default:
           description: Unexpected error
-  /listing:
+  '/listing':
+    x-swagger-router-controller: listingService
     post:
       tags:
         - vendor access
@@ -348,6 +354,7 @@ paths:
         default:
           description: Unexpected error
   '/list/city/{cityName}':
+    x-swagger-router-controller: listingService
     get:
       tags:
         - vendor access
@@ -369,6 +376,7 @@ paths:
         default:
           description: Unexpected error
   '/list/country/{countryName}':
+    x-swagger-router-controller: networkService
     get:
       tags:
         - vendor access
@@ -390,6 +398,7 @@ paths:
         default:
           description: Unexpected error
   '/list/city/{cityName}/serviceType/{serviceType}':
+    x-swagger-router-controller: listingService
     get:
       tags:
         - vendor access
@@ -415,6 +424,7 @@ paths:
         default:
           description: Unexpected error
   '/list/carriers/{status}/page/{pg}':
+    x-swagger-router-controller: listingService
     get:
       tags:
         - vendor access
