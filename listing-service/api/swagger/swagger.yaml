@@ -376,7 +376,7 @@ paths:
         default:
           description: Unexpected error
   '/list/country/{countryName}':
-    x-swagger-router-controller: networkService
+    x-swagger-router-controller: listingService
     get:
       tags:
         - vendor access
