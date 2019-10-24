@@ -160,7 +160,7 @@ function createbranch(req, res) {
   var branchInfo = {
     branchDescription: req.swagger.params.body.value.branchDescription,
     branchName: req.swagger.params.body.value.branchName,
-    branchId: branchName + Math.floor(Math.random() * 10000),
+    branchId: req.swagger.params.body.value.branchName + Math.floor(Math.random() * 10000),
     createdBy: config.currentAuthUser,
     ownershipId: req.swagger.params.ownershipId.value,
     role: "admin"
