@@ -12,6 +12,7 @@ function carrierMetadata(data, userId, tenantId,orgId) {
     } else {
         carrierdata = data;
     }
+    if(carrierdata.basicDetails){
     carrierMetadata.prototype.carrier.basicDetails={};
     carrierMetadata.prototype.carrier.basicDetails.entityType = carrierdata.basicDetails.entityType;
     carrierMetadata.prototype.carrier.basicDetails.carrierName = carrierdata.basicDetails.carrierName;
@@ -28,12 +29,13 @@ function carrierMetadata(data, userId, tenantId,orgId) {
     carrierMetadata.prototype.carrier.basicDetails.contactEMail = carrierdata.basicDetails.contactEMail;
     carrierMetadata.prototype.carrier.basicDetails.contactNo = carrierdata.basicDetails.contactNo;
     carrierMetadata.prototype.carrier.basicDetails.establishmentYear = carrierdata.basicDetails.establishmentYear;
-    carrierMetadata.prototype.carrier.carrierStatus = "new";
+    }
+    carrierMetadata.prototype.carrier.carrierStatus = carrierdata.carrierStatus?carrierdata.carrierStatus:"new";
     carrierMetadata.prototype.carrier.carrierVerificationStatus = "pending";
     carrierMetadata.prototype.carrier.carrierPaymentStatus = "intiated";
   
-   
-    carrierMetadata.prototype.carrier.location=carrierdata.location ? carrierdata.location : {};
+   if(carrierdata.location){
+    carrierMetadata.prototype.carrier.location=carrierdata.location;
     carrierMetadata.prototype.carrier.location.officeType = carrierdata.location ? carrierdata.location.officeType: "not provided";
     carrierMetadata.prototype.carrier.location.address = carrierdata.location ? carrierdata.location.address : "not provided";
     carrierMetadata.prototype.carrier.location.landmark = carrierdata.location ? carrierdata.location.landmark: "not provided";
@@ -42,27 +44,31 @@ function carrierMetadata(data, userId, tenantId,orgId) {
     carrierMetadata.prototype.carrier.location.MapCoordinates=carrierdata.location ? carrierdata.location.MapCoordinates : {};
     carrierMetadata.prototype.carrier.location.MapCoordinates.latitude = carrierdata.location?carrierdata.location.MapCoordinates.latitude:"not provided";
     carrierMetadata.prototype.carrier.location.MapCoordinates.longitude = carrierdata.location?carrierdata.location.MapCoordinates.longitude:"not provided";
+}
 
+if(carrierdata.services){
+    carrierMetadata.prototype.carrier.services=carrierdata.services
+    }
 
-
-    carrierMetadata.prototype.carrier.services=carrierdata.services?carrierdata.services:[]
-
-
+if(carrierdata.lanesAndRoutes){
     carrierMetadata.prototype.carrier.lanesAndRoutes = carrierdata.lanesAndRoutes?carrierdata.lanesAndRoutes:{};
+    }
 
 
    
   //  carrierMetadata.prototype.carrier.tags = carrierdata.tags;
 
-
-    carrierMetadata.prototype.carrier.timingHours=carrierdata.timingHours?carrierdata.timingHours:[];
+if(carrierdata.timingHours){
+    carrierMetadata.prototype.carrier.timingHours=carrierdata.timingHours;
+    }
 
     // carrierMetadata.prototype.carrier.timingHours.Days = carrierdata.timingHours?carrierdata.timingHours.Days:"not provided";
     // carrierMetadata.prototype.carrier.timingHours.from = carrierdata.timingHours?carrierdata.timingHours.from:"not provided";
     // carrierMetadata.prototype.carrier.timingHours.to = carrierdata.timingHours?carrierdata.timingHours.from:"not provided";
     
+    if(carrierdata.verificationDetails){
     carrierMetadata.prototype.carrier.verificationDetails = {}
-
+}
     carrierMetadata.prototype.carrier.createdDTS = carrierdata.createdDTS;
     carrierMetadata.prototype.carrier.updatedDTS = carrierdata.updatedDTS;
 
