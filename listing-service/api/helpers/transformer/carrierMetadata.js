@@ -67,7 +67,7 @@ if(carrierdata.timingHours){
     // carrierMetadata.prototype.carrier.timingHours.to = carrierdata.timingHours?carrierdata.timingHours.from:"not provided";
     
     if(carrierdata.verificationDetails){
-    carrierMetadata.prototype.carrier.verificationDetails = {}
+    carrierMetadata.prototype.carrier.verificationDetails = carrierdata.verificationDetails
 }
     carrierMetadata.prototype.carrier.createdDTS = carrierdata.createdDTS;
     carrierMetadata.prototype.carrier.updatedDTS = carrierdata.updatedDTS;
