@@ -184,7 +184,7 @@ carrier.prototype.findAllCarriersForAllcityPublic = (traceId, startfrom,cb) => {
         statusCode: 404,
         errorCode: "code1"
     }
-    rdb.table("carrier").filter({"carrierStatus":"publish"}).skip(startfrom).limit(10).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
+    rdb.table("carrier").filter({"carrierStatus":"approved"}).skip(startfrom).limit(10).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
         var resObj = { "status": "200", "data": result }
         cb(null, resObj);
     }).catch(function (err) {
@@ -196,11 +196,11 @@ carrier.prototype.findAllCarriersForAllcityPublic = (traceId, startfrom,cb) => {
 
 // Getpublished carrier by cityId
 carrier.prototype.getcityCarriersList = (traceId, cityId, cb) => {
-    rdb.table("carrier").filter({"basicDetails":{ "city": cityId},"carrierStatus":"publish"}).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
+    rdb.table("carrier").filter({"basicDetails":{ "city": cityId},"carrierStatus":"approved"}).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
   
         if (result.length > 0) {
 
-            rdb.table("carrier").filter({"basicDetails":{ "city": cityId},"carrierStatus":"publish"}).count().run().then(function (result2) {
+            rdb.table("carrier").filter({"basicDetails":{ "city": cityId},"carrierStatus":"approved"}).count().run().then(function (result2) {
 
                 if (result.length > 0) {
                                 var resObj = { "status": "200", "data": result,"count":result2}
@@ -229,10 +229,10 @@ carrier.prototype.getcityCarriersList = (traceId, cityId, cb) => {
 
 // Getpublished carrier by Country
 carrier.prototype.getCountryCarriersList = (traceId, CountryId, cb) => {
-    rdb.table("carrier").filter({"basicDetails":{ country: CountryId},carrierStatus:"publish"}).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
+    rdb.table("carrier").filter({"basicDetails":{ country: CountryId},carrierStatus:"approved"}).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
 
         if (result.length > 0) {
-            rdb.table("carrier").filter({"basicDetails":{ "country": CountryId},"carrierStatus":"publish"}).count().run().then(function (result2) {
+            rdb.table("carrier").filter({"basicDetails":{ "country": CountryId},"carrierStatus":"approved"}).count().run().then(function (result2) {
 
                 if (result.length > 0) {
                                 var resObj = { "status": "200", "data": result,"count":result2}
@@ -260,7 +260,7 @@ carrier.prototype.getCountryCarriersList = (traceId, CountryId, cb) => {
 
 // Getpublished carrier by cityid and service type
 carrier.prototype.getcityCarriersListByServiceType = (traceId, cityId, type,cb) => {
-    rdb.table("carrier").filter({'basicDetails':{'city':cityId}}).filter(rdb.row('services')('modeType').contains(type)).without('verificationDetails').run().then(function (result){
+    rdb.table("carrier").filter({'basicDetails':{'city':cityId}}).filter(rdb.row('services')('modeType').contains(type)).run().then(function (result){
 
         if (result.length > 0){
             
@@ -280,7 +280,7 @@ carrier.prototype.getcityCarriersListByServiceType = (traceId, cityId, type,cb) 
 }
 // Get vendors carrier by vendorId
 carrier.prototype.ownerCarriers = (traceId, userId, cb) => {
-    rdb.table("carriers").filter({ userId: userId,"carrierStatus":"publish"}).without("images","logo").run().then(function (result) {
+    rdb.table("carriers").filter({ userId: userId,"carrierStatus":"approved"}).without("images","logo").run().then(function (result) {
 
         if (result.length > 0) {
                         var resObj = { "status": "200", "data": result }
@@ -300,7 +300,7 @@ carrier.prototype.ownerCarriers = (traceId, userId, cb) => {
 
 // Get carrierId for vendor
 carrier.prototype.getOneCarrier = (traceId, carrierId, cb) => {
-    rdb.table("carrier").filter({carrierId:carrierId}).without('verificationDetails').run().then(function (result) {
+    rdb.table("carrier").filter({carrierId:carrierId}).run().then(function (result) {
 
         if (result.length > 0) {
                         var resObj = { "status": "200", "data": result }
@@ -318,7 +318,7 @@ carrier.prototype.getOneCarrier = (traceId, carrierId, cb) => {
 }
 
 carrier.prototype.getCarrier = (traceId, carrierId, cb) => {
-    rdb.table("carrier").filter({carrierId:carrierId}).without('verificationDetails').run().then(function (result) {
+    rdb.table("carrier").filter({carrierId:carrierId}).run().then(function (result) {
 
         if (result.length > 0) {
                         var resObj = { "status": "200", "data": result }
