@@ -196,11 +196,11 @@ carrier.prototype.findAllCarriersForAllcityPublic = (traceId, startfrom,cb) => {
 
 // Getpublished carrier by cityId
 carrier.prototype.getcityCarriersList = (traceId, cityId, cb) => {
-    rdb.table("carrier").filter({"basicDetails":{ "city": cityId},"carrierStatus":"approved"}).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
+    rdb.table("carrier").filter({"basicDetails":{ "city": cityId}}).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
   
         if (result.length > 0) {
 
-            rdb.table("carrier").filter({"basicDetails":{ "city": cityId},"carrierStatus":"approved"}).count().run().then(function (result2) {
+            rdb.table("carrier").filter({"basicDetails":{ "city": cityId}}).count().run().then(function (result2) {
 
                 if (result.length > 0) {
                                 var resObj = { "status": "200", "data": result,"count":result2}
@@ -232,7 +232,7 @@ carrier.prototype.getCountryCarriersList = (traceId, CountryId, cb) => {
     rdb.table("carrier").filter({"basicDetails":{ country: CountryId},carrierStatus:"approved"}).pluck('carrierStatus','carrierId','basicDetails','carrierVerificationStatus').run().then(function (result) {
 
         if (result.length > 0) {
-            rdb.table("carrier").filter({"basicDetails":{ "country": CountryId},"carrierStatus":"approved"}).count().run().then(function (result2) {
+            rdb.table("carrier").filter({"basicDetails":{ "country": CountryId}}).count().run().then(function (result2) {
 
                 if (result.length > 0) {
                                 var resObj = { "status": "200", "data": result,"count":result2}
@@ -280,7 +280,7 @@ carrier.prototype.getcityCarriersListByServiceType = (traceId, cityId, type,cb) 
 }
 // Get vendors carrier by vendorId
 carrier.prototype.ownerCarriers = (traceId, userId, cb) => {
-    rdb.table("carriers").filter({ userId: userId,"carrierStatus":"approved"}).without("images","logo").run().then(function (result) {
+    rdb.table("carriers").filter({ userId: userId}).without("images","logo").run().then(function (result) {
 
         if (result.length > 0) {
                         var resObj = { "status": "200", "data": result }
