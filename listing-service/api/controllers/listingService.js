@@ -25,7 +25,10 @@ module.exports = {
     getCarriersAllInReview:getCarriersAllInReview,
     deleteCarrier:deleteCarrier,
     updateCarrierVerification:updateCarrierVerification,
-    getListByPage:getListByPage
+    getListByPage:getListByPage,
+
+    getcityCarriersListByfilterByCity:getcityCarriersListByfilterByCity,
+    getcityCarriersListByfilter:getcityCarriersListByfilter
    
 };
 
@@ -288,6 +291,52 @@ function getcityCarriersListByServiceType(req, res) {
              }
          });
  }
+
+//Pull city's all Carriers and theirs replies
+function getcityCarriersListByfilterByCity(req, res) {
+    // var tokenId = req.headers.user_access;
+     var cityId = req.swagger.params.cityName.value;
+     var serviceType = req.swagger.params.filterType.value;
+     var serviceType = req.swagger.params.filterName.value;
+     var filterValue = req.swagger.params.filterValue.value;
+     var serviceType = req.swagger.params.pg.value;
+     var traceId = process.env.TRACE_VARIABLE|| "my test";
+     (new Carrier()).findAllCarriersForAllFiltersByCity(traceId,city, filterType,filterName,filterValue,pg,
+         function (err, content) {
+             if (err) {
+               
+                 res.end(JSON.stringify(err));
+                 log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
+             } else if (content) {
+                 res.set('Content-Type', 'application/json');
+                 res.json(content)
+             }
+         });
+ }
+
+
+//Pull city's all Carriers and theirs replies
+function getcityCarriersListByfilter(req, res) {
+    // var tokenId = req.headers.user_access;
+   
+     var filterType = req.swagger.params.filterType.value;
+     var filterName = req.swagger.params.filterName.value;
+     var filterValue = req.swagger.params.filterValue.value;
+     var pg = req.swagger.params.pg.value;
+     var traceId = process.env.TRACE_VARIABLE|| "my test";
+     (new Carrier()).findAllCarriersForAllFilters(traceId, filterType,filterName,filterValue,pg,
+         function (err, content) {
+             if (err) {
+               
+                 res.end(JSON.stringify(err));
+                 log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
+             } else if (content) {
+                 res.set('Content-Type', 'application/json');
+                 res.json(content)
+             }
+         });
+ }
+
 
 //Pull city's all Carriers and theirs replies
 function getOwnerCarriers(req, res) {

@@ -397,22 +397,68 @@ paths:
               $ref: '#/definitions/list'
         default:
           description: Unexpected error
-  '/list/city/{cityName}/serviceType/{serviceType}':
+  '/list/city/{cityName}/ftype/{filterType}/fname/{filterName}/fvalue/{filterValue}/page/{pg}':
     x-swagger-router-controller: listingService
     get:
       tags:
         - vendor access
       summary: Get all lists
       description: Get all lists
-      operationId: getcityCarriersListByServiceType
+      operationId: getcityCarriersListByfilterByCity
       parameters:
         - name: cityName
           in: path
           type: string
           required: true
-        - name: serviceType
+        - name: filterType
           in: path
           type: string
+          required: true
+        - name: filterName
+          in: path
+          type: string
+          required: true
+        - name: filterValue
+          in: path
+          type: string
+          required: true
+        - name: pg
+          in: path
+          type: number
+          required: true
+      responses:
+        '200':
+          description: A list of lists.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/list'
+        default:
+          description: Unexpected error
+  '/list/ftype/{filterType}/fname/{filterName}/fvalue/{filterValue}/page/{pg}':
+    x-swagger-router-controller: listingService
+    get:
+      tags:
+        - filters
+      summary: Get all lists
+      description: Get all lists
+      operationId: getcityCarriersListByfilter
+      parameters:
+        - name: filterType
+          in: path
+          type: string
+          required: true
+        - name: filterName
+          in: path
+          type: string
+          required: true
+        - name: filterValue
+          in: path
+          type: string
+          required: true
+        - name: pg
+          in: path
+          type: number
           required: true
       responses:
         '200':

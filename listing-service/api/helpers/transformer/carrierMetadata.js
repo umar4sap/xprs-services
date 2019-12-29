@@ -46,10 +46,17 @@ function carrierMetadata(data, userId, tenantId,orgId) {
     carrierMetadata.prototype.carrier.location.MapCoordinates.longitude = carrierdata.location?carrierdata.location.MapCoordinates.longitude:"not provided";
 }
 
-if(carrierdata.services){
-    carrierMetadata.prototype.carrier.services=carrierdata.services
-    }
 
+    carrierMetadata.prototype.carrier.services=carrierdata.services
+    carrierMetadata.prototype.carrier.modeType=carrierdata.modeType
+    carrierMetadata.prototype.carrier.cargoCarried=carrierdata.cargoCarried
+    carrierMetadata.prototype.carrier.deliveryType=carrierdata.deliveryType
+    carrierMetadata.prototype.carrier.establishmentType=carrierdata.establishmentType
+    carrierMetadata.prototype.carrier.networkInfo=carrierdata.networkInfo
+    carrierMetadata.prototype.carrier.serviceType=carrierdata.serviceType
+    carrierMetadata.prototype.carrier.paymentType=carrierdata.paymentType
+    carrierMetadata.prototype.carrier.sponsored=carrierdata.sponsored?carrierdata.sponsored:"NA"
+    
 if(carrierdata.lanesAndRoutes){
     carrierMetadata.prototype.carrier.lanesAndRoutes = carrierdata.lanesAndRoutes?carrierdata.lanesAndRoutes:{};
     }

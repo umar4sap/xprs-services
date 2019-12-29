@@ -351,8 +351,84 @@ carrier.prototype.carriersApproval = (status,traceId, cityId,carrierId, cb) => {
 
 
 
+// list all carrier for platform admin level
+carrier.prototype.findAllCarriersForAllFilters = (traceId, filterType,filterName,filterValue,pg,cb) => {
+    var response = {
+        message: "Cannot Get all carrier issue with db.",
+        statusCode: 404,
+        errorCode: "code1"
+    }
+   
+        rdb.table("carrier")
+        .filter(rdb.row(filterType).contains(function(filter) {
+            return filter(filterName).eq(filterValue)
+          }))
+          .skip(pg).limit(10).run().then(function (dataResponse) {
+          
+            if (dataResponse.length > 0) {
+                rdb.table("carrier")
+                .filter(rdb.row(filterType).contains(function(filter) {
+                    return filter(filterName).eq(filterValue)
+                  })).count().then(function (actualDataCount) {
+                    var resObj = { "status": "200", "data": dataResponse,"count":actualDataCount}
+                    cb(null, resObj);
+
+                }).catch(function (err) {
+                    var resObj = { "status": "200", "data":  result,"count":"count db error" }
+                        cb(null, resObj);
+                })
+            }else{
+                var resObj = { "status": "200", "data": dataResponse }
+                cb(null, resObj);
+            }
+        }).catch(function (err) {
+            var resObj = { "status": "200", "data":  result,"count":"count db error" }
+                cb(null, resObj);
+        })
+   
+}
 
 
+
+// list all carrier for platform admin level
+carrier.prototype.findAllCarriersForAllFiltersByCity = (traceId,city, filterType,filterName,filterValue,pg,cb) => {
+    var response = {
+        message: "Cannot Get all carrier issue with db.",
+        statusCode: 404,
+        errorCode: "code1"
+    }
+   
+        rdb.table("carrier").filter({"basicDetails": {
+            "city":  city}})
+        .filter(rdb.row(filterType).contains(function(filter) {
+            return filter(filterName).eq(filterValue)
+          }))
+          .skip(pg).limit(10).run().then(function (dataResponse) {
+          
+            if (dataResponse.length > 0) {
+                rdb.table("carrier")
+                .filter({"basicDetails": {
+                    "city":  city}})
+                .filter(rdb.row(filterType).contains(function(filter) {
+                    return filter(filterName).eq(filterValue)
+                  })).count().then(function (actualDataCount) {
+                    var resObj = { "status": "200", "data": dataResponse,"count":actualDataCount}
+                    cb(null, resObj);
+
+                }).catch(function (err) {
+                    var resObj = { "status": "200", "data":  result,"count":"count db error" }
+                        cb(null, resObj);
+                })
+            }else{
+                var resObj = { "status": "200", "data": dataResponse }
+                cb(null, resObj);
+            }
+        }).catch(function (err) {
+            var resObj = { "status": "200", "data":  result,"count":"count db error" }
+                cb(null, resObj);
+        })
+   
+}
 
 
 
