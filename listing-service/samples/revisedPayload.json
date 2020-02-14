@@ -1,0 +1,257 @@
+[ 
+    { 
+       "basicDetails":{ 
+          "branch":"Malda",
+          "carrierName":"UmarsEmpire2",
+          "carrierPhoto":"null",
+          "city":"MUM",
+          "companyWebsite":"http:jhgjhg.com",
+          "contactEMail":{ 
+             "Contact_Type":{ 
+                "Contact_Type":1,
+                "Contact_Type_Value":"Customer Service"
+             },
+             "email_Address":"vishwanth@gmail.com"
+          },
+          "contactNo":"",
+          "country":"",
+          "entityType":{ 
+             "id":"1",
+             "value":"Carrier"
+          },
+          "establishmentYear":"2019",
+          "locality":"Gachibowli",
+          "ownerEMail":"vishu@gmail.com",
+          "ownerName":"VIshwanath",
+          "ownerPhone":"9279278867",
+          "ownershipType":"Yes"
+       },
+       "cargoCarried":{
+          "BEV":{ 
+             "Cargo_Type":1,
+             "Cargo_Value":"Beverages"
+          },
+          "BOATS":{ 
+             "Cargo_Type":2,
+             "Cargo_Value":"Boats"
+          },
+          "CONTAINERS":{ 
+             "Cargo_Type":3,
+             "Cargo_Value":"Containers"
+          },
+          "DANGEROUSGOOD":{ 
+             "Cargo_Type":4,
+             "Cargo_Value":"Dangerous Goods"
+          }
+       },
+       "carrierId":"75362862-c349-47c1-9493-a6ba26316e52",
+       "carrierNameSpace":"UmarsEmpire2--MUM-Gachibowli",
+       "carrierPaymentStatus":"intiated",
+       "carrierStatus":"approved",
+       "carrierVerificationStatus":"pending",
+       "createdDTS":"2019-12-29T15:52:22Z",
+       "deliveryType":{ 
+          "POINTTOPOINT":{ 
+             "Delivery_Value":"Point to Point",
+             "Delivery_type":1,
+             "Mode_Type":1
+          },
+          "DOORTODOOR":{ 
+             "Delivery_Value":"Door to Door",
+             "Delivery_type":99,
+             "Mode_Type":999
+          }
+       },
+       "establishmentType":{
+          "TRANSPORTLOGISTIC":{ 
+             "Establishment_Type":1,
+             "Establishment_Value":"Transport & Logistics"
+          }
+        },
+       "expringDate":{ 
+          "$reql_type$":"TIME",
+          "epoch_time":1593186742.806,
+          "timezone":"+00:00"
+       },
+       "lanesAndRoutes":{ 
+ 
+       },
+       "listedDate":{ 
+          "$reql_type$":"TIME",
+          "epoch_time":1577634742.806,
+          "timezone":"+00:00"
+       },
+       "location":{ 
+          "Address":"hyderabad",
+          "Country":"India",
+          "Landmark":"Above reliance digital",
+          "MapCoordinates":{ 
+             "latitude":17.4400802,
+             "longitude":78.34891679999998
+          },
+          "Office_Type":{ 
+             "Office_Type":1,
+             "Office_Type_Value":"Global Head Office"
+          },
+          "Pincode":"500032",
+          "State":"Telangana",
+          "googleAddress":"Gachibowli, Hyderabad, Telangana, India"
+       },
+       "modeType":{
+          "ROAD":{ 
+             "isSelected":true,
+             "modeType":"Road"
+          },
+          "RAIL":{ 
+             "isSelected":false,
+             "modeType":"Rail"
+          },
+          "AIR":{ 
+             "isSelected":false,
+             "modeType":"Air"
+          },
+          "SEA":{ 
+             "isSelected":false,
+             "modeType":"Sea"
+          }
+       },
+       "networkInfo":[ 
+          { 
+             "Destination":"gachiboli",
+             "Network_Preference":"1",
+             "Origin":"India",
+             "Transit_Time":"1,Same Day",
+             "id":"index0",
+             "serviceType":"Full Truckload (FTL)"
+          },
+          { 
+             "Destination":"dsdsdcd",
+             "Network_Preference":"1",
+             "Origin":"India",
+             "Transit_Time":"2,Next Day",
+             "id":"index1",
+             "serviceType":"Part Truckload (PTL)"
+          },
+          { 
+             "Destination":"dvdsvsdbsfdb",
+             "Network_Preference":"1",
+             "Origin":"India",
+             "Transit_Time":"3,2 Days",
+             "id":"index2",
+             "serviceType":"Parcel Service"
+          },
+          { 
+             "Destination":"csdvbsvwS",
+             "Network_Preference":"1",
+             "Origin":"India",
+             "Transit_Time":"4,3 Days",
+             "id":"index3",
+             "serviceType":"Project Cargo"
+          },
+          { 
+             "Destination":"VzcSDDSDS",
+             "Network_Preference":"1",
+             "Origin":"India",
+             "Transit_Time":"5,3+ Days",
+             "id":"index4",
+             "serviceType":"Car Carrier"
+          },
+          { 
+             "Destination":"AVSDVSDCA",
+             "Network_Preference":"1",
+             "Origin":"India",
+             "Transit_Time":"6,Custom",
+             "id":"index5",
+             "serviceType":"Last Mile Service"
+          },
+          { 
+             "Destination":"ADVCASCASCSA",
+             "Network_Preference":"1",
+             "Origin":"India",
+             "Transit_Time":"1,Same Day",
+             "id":"index6",
+             "serviceType":"..Others"
+          }
+       ],
+       "paymentType":{
+          "cash":{ 
+             "payment_Type":1
+          }
+        },
+       "serviceType":{ 
+          "FTL":{ 
+             "Mode_Type":1,
+             "Service_Type":1,
+             "Service_Value":"Full Truckload (FTL)"
+          }
+        },
+       "sponsored":"NA",
+       "timingHours":{ 
+          "Friday_Timings":[ 
+ 
+          ],
+          "Monday_Timings":[ 
+             { 
+                "FromTime":"05:27 PM",
+                "ToTime":"06:27 PM"
+             }
+          ],
+          "Saturday_Timings":[ 
+ 
+          ],
+          "Sunday_Timings":[ 
+             { 
+                "FromTime":"05:27 PM",
+                "ToTime":"06:27 PM"
+             }
+          ],
+          "Thursday_Timings":[ 
+             { 
+                "FromTime":"05:27 PM",
+                "ToTime":"06:27 PM"
+             }
+          ],
+          "Tuesday_Timings":[ 
+ 
+          ],
+          "Wednesday_Timings":[ 
+ 
+          ],
+          "allDays":[ 
+             { 
+                "DayName":"Monday",
+                "Timeings":[ 
+                   "05:27 PM",
+                   "06:27 PM"
+                ],
+                "priority":0
+             },
+             { 
+                "DayName":"Thursday",
+                "Timeings":[ 
+                   "05:27 PM",
+                   "06:27 PM"
+                ],
+                "priority":3
+             },
+             { 
+                "DayName":"Sunday",
+                "Timeings":[ 
+                   "05:27 PM",
+                   "06:27 PM"
+                ],
+                "priority":6
+             }
+          ],
+          "whetherFriday":false,
+          "whetherMonday":true,
+          "whetherSaturday":false,
+          "whetherSunday":true,
+          "whetherThursday":true,
+          "whetherTuesday":false,
+          "whetherWednesday":false
+       },
+       "updatedDTS":"2019-12-29T15:52:22Z",
+       "userId":"5b81aae2ad451875aad41c92"
+    }
+ ]

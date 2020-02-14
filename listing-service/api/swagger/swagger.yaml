@@ -495,6 +495,36 @@ paths:
               $ref: '#/definitions/list'
         default:
           description: Unexpected error
+  '/filter/carriers/{pg}':
+    x-swagger-router-controller: listingService
+    post:
+      tags:
+        - special filter
+      summary: filter a list.
+      description: user can filter list
+      operationId: filterCarriers
+      produces:
+        - application/json
+      parameters:
+        - name: pg
+          in: path
+          type: number
+          required: true
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/updatelist'
+      responses:
+        '200':
+          description: lists details
+          schema:
+            type: object
+            properties: {}
+        '400':
+          description: Error user can filter list
+        default:
+          description: Unexpected error
   /swagger: 
     x-swagger-pipe: swagger_raw
 definitions:

@@ -1,0 +1,29 @@
+{
+	"cargoCarried":
+	{
+         "BEV":{ 
+            "Cargo_Type":1
+        
+         },
+         
+         "BOATS":{ 
+            "Cargo_Type":2
+         
+         },
+         "CONTAINERS":{ 
+            "Cargo_Type":3
+          
+         },
+         "DANGEROUSGOOD":{ 
+            "Cargo_Type":4
+          
+         }
+},
+"deliveryType":{ 
+    "POINTTOPOINT":{ 
+       "Delivery_Value":"Point to Point"
+      
+    }
+ }
+  
+  }

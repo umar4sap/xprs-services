@@ -67,6 +67,50 @@ carrier.prototype.postCarrier =(traceId, userId , cb) => {
                 });  
         }
 
+
+
+// create new carrier for owner
+carrier.prototype.filterCarriers =(traceId , startfrom,cb) => {
+  
+    var carrierMetadata = new CarrierMetadata(carrier.prototype.data).getData();
+    var response = {
+        message: "Cannot create the carrier.",
+        statusCode: 404,
+        errorCode: "code1"
+    }
+    delete carrierMetadata.carrierPaymentStatus
+    delete carrierMetadata.carrierStatus
+    delete carrierMetadata.carrierVerificationStatus
+    delete carrierMetadata.sponsored
+    rdb.table("carrier").filter(carrierMetadata).skip(startfrom).limit(10).run().then(function (result) {
+        rdb.table("carrier").filter(carrierMetadata).count().run().then(function (result2) {
+        if (result.length > 0) {
+                                var resObj = { "status": "200", "data": result,"count":result2}
+                                cb(null, resObj);
+            } else {
+                var resObj = { "status": "200", "data": result ,"count":result2}
+                cb(null, resObj);
+            }
+
+            }).catch(function (err) {
+                var resObj = { "status": "200", "data":  result,"count":"count db error" }
+                    cb(null, resObj);
+            })
+        
+        
+        
+       
+    }).catch(function (err) {
+        log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
+        
+        cb(response);
+    });
+        }
+
+
+
+
+
 // update carrier for owner
 carrier.prototype.updateCarrierById =(traceId, carrierId , cb) => {
     carrier.prototype.data['updatedDTS'] = moment.utc().format();

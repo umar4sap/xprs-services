@@ -28,7 +28,10 @@ module.exports = {
     getListByPage:getListByPage,
 
     getcityCarriersListByfilterByCity:getcityCarriersListByfilterByCity,
-    getcityCarriersListByfilter:getcityCarriersListByfilter
+    getcityCarriersListByfilter:getcityCarriersListByfilter,
+
+
+    filterCarriers:filterCarriers,
    
 };
 
@@ -62,6 +65,26 @@ function addCarrier(req, res) {
                     }
                 });
         }
+
+
+        function filterCarriers(req, res) {
+            var traceId="filterstest"
+            var pg = req.swagger.params.pg.value;
+            //var userType= req.user[URL].userType;
+            var bodyData = req.swagger.params.body.value;
+           // var cityId = req.swagger.params.cityId.value;
+                    (new Carrier(bodyData)).filterCarriers(traceId,pg,
+                        function (err, content) {
+                            console.log('after save...'+content)
+                            if (err) {
+                                console.log("errrrrrrrrrrr")
+                                res.send(JSON.stringify(err));
+                                log.error("TraceId : %s, Error : %s", traceId, JSON.stringify(err));
+                            } else {
+                                res.json(content);
+                            }
+                        });
+                }
 
 // update a  Carrier
 function updateCarrier(req, res) {
